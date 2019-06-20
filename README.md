@@ -1,3 +1,3 @@
 # MelgramCNN
 
-MelgramCNN project
+MelgramCNN project in progress

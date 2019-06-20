@@ -78,5 +78,4 @@ if __name__ == '__main__':
             fname = './trainset/{}_{}_.jpg'.format(file[:-4], label)
             plt.imsave(fname, S_mel)
         del df
-
     print('Done.')

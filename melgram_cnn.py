@@ -218,20 +218,14 @@ class TrainNet:
             for batch_iter_train, train_batch in enumerate(self.train_loader, 1):
                 inputs, labels = train_batch['image'], train_batch['label']
                 inputs = inputs.cuda()
-
                 labels = torch.from_numpy(np.array(labels)).float()
                 labels = labels.view(-1, 1)
                 labels = labels.cuda()
-
                 optimizer.zero_grad()
-
                 outputs = self.net(inputs)
                 train_loss = self.criterion(outputs, labels)
                 running_train_loss += train_loss.item()
 
                 train_loss.backward()
                 optimizer.step()
-
-            print('Epoch {} \n train loss: {:4.6f} ----- test loss {:4.6f} '.format(epoch,
-                                                                                    train_losses[-1],
-                                                                                    test_losses[-1]))
+            print('Epoch {} \n train loss: {:4.6f} ----- test loss {:4.6f} '.format(epoch, train_losses[-1], test_losses[-1]))
