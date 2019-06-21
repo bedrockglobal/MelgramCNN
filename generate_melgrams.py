@@ -31,12 +31,8 @@ def mel_spectrogram(signal, size, hop_length, window, n_mels):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Generate Mel-Spectrograms')
-    parser.add_argument('trainset', type=bool, help='True if train set, else False')
-    parser.add_argument('basedir', type=str, help='Input directory ')
+    parser.add_argument('-trainset', type=str, help='True if train set, else False')
     args = parser.parse_args()
-
-    train_flag = args.trainset
-    base_dir = args.indir # base directory containing test/train sets
 
     M = 4096  # window size
     RATE = 4e6  # sample rate
@@ -45,14 +41,17 @@ if __name__ == '__main__':
     n_mels = 64  # number of mel bands to generate
     num_samples = 1000  # number of times to sample from an experiment
 
+    train_flag = args.parse_args()
+    print(args)
+    sys.exit()
     print('Generating MelSpectrograms...')
-    if not train_flag:
-        test_names = os.listdir(os.path.join(base_dir, 'testset'))
+    if not args.trainset:
+        print('training')
+        test_names = os.listdir('./test_set_files')
         for file in tqdm(test_names):
-            df = pd.read_csv(base_dir + file)
+            df = pd.read_csv('./test_set_files/' + file)
             S_mel = mel_spectrogram(df['acoustic_data'].values, M, HOP_LENGTH, 'hanning', n_mels)
-
-            file_path = os.path.join('./testset/', file[:-4] + '.jpg')
+            file_path = os.path.join('./test_set_files/', file[:-4] + '.jpg')
             plt.imsave(file_path, S_mel)
         sys.exit()
 
@@ -66,16 +65,16 @@ if __name__ == '__main__':
     quake_length = list(np.diff(quakes))
     files = ['file_{}.csv'.format(i) for i in range(1, 16)]  # files to read in
 
-    for i, file in enumerate(files):
-        df = pd.read_csv('./split/' + file, header=None, names=['acoustic_data', 'time_to_failure'])
+    for i, file in tqdm(enumerate(files)):
+        df = pd.read_csv('./train_set_files/' + file, header=None, names=['acoustic_data', 'time_to_failure'])
         random_idxs = [np.random.randint(0, quake_length[i] - sample_size) for j in range(num_samples)]
         for random_idx in random_idxs:
             start = random_idx
             end = start + sample_size
             signal = df['acoustic_data'].iloc[start:end].values
             label = df['time_to_failure'].iloc[end]
-            S_mel = mel_spectrogram(signal, size=M, hop_lenght=HOP_LENGTH, window='hanning')
-            fname = './trainset/{}_{}_.jpg'.format(file[:-4], label)
+            S_mel = mel_spectrogram(signal, size=M, hop_length=HOP_LENGTH, window='hanning', n_mels=n_mels)
+            fname = './train_set_imgs/{}_{}_.jpg'.format(file[:-4], label)
             plt.imsave(fname, S_mel)
         del df
     print('Done.')

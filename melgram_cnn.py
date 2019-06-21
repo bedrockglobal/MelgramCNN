@@ -44,9 +44,9 @@ class GetDataset(Dataset):
         """
         self.train_flag = train_set
         if self.train_flag:
-            self.root_dir = './melgram_dataset/trainset'
+            self.root_dir = './train_set_imgs'
         else:
-            self.root_dir = './melgram_dataset/testset'
+            self.root_dir = './test_set_imgs'
         self.files = os.listdir(self.root_dir)
         self.transform = transform
 
@@ -169,7 +169,6 @@ class TrainNet:
     train(learn_rate)
         Executes training steps (forward propagation and optimization)
     """
-
     def __init__(self, net, train_set, test_set, num_epochs):
         self.net = net
         self.train_loader = train_set
