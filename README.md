@@ -1,35 +1,16 @@
 # MelgramCNN
 
+MelgrammCNN is a Convolutional Neural Network used in a regression setting. Features are extractracted from MelSpectrograms to predict the `remaining_time_left` given acoustic signals emmited by a laboratory fault. This is a two step process:
+
+(1) Generate MelSpectrograms given acoustic data
+(2) Train a CNN on Generated MelSpectrograms.
+(3) Predict `remaining_time_left` given a 150,000 size sample of acoustic data. 
+
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ### And coding style tests
 
@@ -41,7 +22,8 @@ Give an example
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **William Mendoza Gopar** 
+* **Brian Whiteaker** 
+* **Premanand Kumar** 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
