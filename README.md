@@ -1,6 +1,6 @@
 # MelgramCNN
 
-MelgrammCNN is a Convolutional Neural Network used in a regression setting. Features are extractracted from MelSpectrograms to predict the `remaining_time_left` given acoustic signals emmited by a laboratory fault. This process is as follows:
+MelgrammCNN is a prototype of a Convolutional Neural Network used in a regression setting. Features are extractracted from MelSpectrograms to predict the `remaining_time_left` given acoustic signals emmited by a laboratory fault. This process is as follows:
 
 (1) Generate MelSpectrograms given acoustic data
 
